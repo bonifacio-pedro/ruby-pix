@@ -2,9 +2,12 @@ require_relative 'pix'
 require_relative 'transaction'
 require_relative 'config'
 
+system('clear')
+
 if ARGV[0] == "--novo" or ARGV[0] == "-n"
     if ARGV[1] != nil and PIX_TYPES.include?(ARGV[1])
         if ARGV[2] != nil
+            sleep(1)
             puts Pix.insert_data_new_pix(ARGV[1], ARGV[2])
         else
             puts "Adicione uma chave válida"
@@ -18,6 +21,7 @@ if ARGV[0] == "--novo" or ARGV[0] == "-n"
     end
 elsif ARGV[0] == "--transacao" or ARGV[0] == "-t"
     if ARGV[1] != nil and ARGV[2] != nil
+        sleep(1)
         transaction = Transaction.new(ARGV[1],ARGV[2])
     else
         puts "Adicione chaves válidas para a transação!"
