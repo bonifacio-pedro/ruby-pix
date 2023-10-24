@@ -6,6 +6,7 @@ module Config
     PIX_TYPES = ["CPF","TEL","EMAIL"]
     EMAIL_REGEX =/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     HELPER = "Adicione um parâmetro válido, exemplos: \n
-    --novo [tipo] [chave] \n
-    --transacao [chave-pagador] [chave-recebedor]" 
+    --novo -n [tipo] [chave]
+    --transacao -t [chave-pagador] [chave-recebedor]
+    --transacoes -ta [mostra todas transações]"
 end
