@@ -18,13 +18,13 @@ class Transaction
       DB.execute 'INSERT INTO Transactions VALUES (?, ?, ?, ?)', [@payer, @receiver, @date.inspect.to_s, price.to_f]
       puts transaction_table
     else
-      puts 'Chaves não encontradas'
+      puts 'Keys not found'
     end
   end
 
   def transaction_table
     table = TTY::Table.new(
-      header: ['Pagador', 'Recebedor', 'Valor', 'Data e hora'],
+      header: ['Payer', 'Receiver', 'Price', 'Datetime'],
       rows: [[@payer, @receiver, @price, @date.inspect.to_s[0..15]]]
     )
     table.render(:unicode)
