@@ -33,7 +33,7 @@ class Pix
     return 'No records begin with this combination' if search.empty?
 
     table = TTY::Table.new(
-      header: ['Key type', 'Key']
+      header: %w[Key-type Key]
     )
     search.map { |s| table << s }
     table.render(:unicode)

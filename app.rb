@@ -11,7 +11,7 @@ sleep(2)
 spinner.stop('Ready!')
 
 case ARGV[0]
-when '--novo'
+when '--new'
   if !ARGV[1].nil? && Config::PIX_TYPES.include?(ARGV[1])
     if !ARGV[2].nil?
       sleep(1)
@@ -26,7 +26,7 @@ when '--novo'
         - CELL
         - EMAIL'
   end
-when '--transacao'
+when '--transaction'
   if !ARGV[1].nil? && !ARGV[2].nil? && !ARGV[3].nil? && !ARGV[3].include?(',')
     sleep(1)
     Transaction.new(ARGV[1], ARGV[2], ARGV[3].to_f)
@@ -34,18 +34,18 @@ when '--transacao'
     puts "Add keys and a valid price for the transaction! example:\n
     ruby app.rb -t [VALID KEY] [VALID KEY] 10.99"
   end
-when '--transacoes'
+when '--transactions'
   table = TTY::Table.new(
-    header: ['Payer', 'Receiver', 'Datetime', 'Price']
+    header: %W[Payer Receiver Datetime Price]
   )
   transactions = Transaction.return_all_transactions
-  transactions.each do |t|
+  transactions.map { |t|
     t[2] = t[2].inspect.to_s[1..16]
     table << t
-  end
+  }
   puts table.render(:unicode)
 when '--search'
-  if ARGV[1].nil?
+  if !ARGV[1].nil?
     puts Pix.search_key_initial(ARGV[1])
   else
     puts 'Enter a valid search parameter'
