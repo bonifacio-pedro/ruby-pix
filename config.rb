@@ -1,14 +1,13 @@
-require 'sqlite3'
+# frozen_string_literal: true
 
 # Constants
 module Config
-  DB = SQLite3::Database.open 'db/database.db'
   PIX_TYPES = %w[CPF CELL EMAIL].freeze
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d]+(\.[a-z\d]+)*\.[a-z]+\z/i.freeze
   HELPER = "Valid parameters, examples: \n
-    --new [type] [key]
-    --transaction [payer-key] [receiver-key]
+    --new [username] [key-type] [key]
+    --transaction [payer-key] [receiver-key] [transaction-price]
     --transactions [show all transactions]
     --search [key-search]
-    --flush (delete db)".freeze
+    --db (configure db)"
 end
