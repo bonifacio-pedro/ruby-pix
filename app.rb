@@ -5,11 +5,10 @@ require 'tty-spinner'
 require 'tty-table'
 
 system('clear')
-spinner = TTY::Spinner.new('[:spinner] Carregando sistema...', format: :pulse_2)
+spinner = TTY::Spinner.new('[:spinner] Loading system...', format: :pulse_2)
 spinner.auto_spin
 sleep(2)
-spinner.stop('Pronto!')
-puts "\n"
+spinner.stop('Ready!')
 
 case ARGV[0]
 when '--novo'
@@ -18,13 +17,13 @@ when '--novo'
       sleep(1)
       puts Pix.insert_data_new_pix(ARGV[1], ARGV[2])
     else
-      puts 'Adicione uma chave válida'
+      puts 'Add a valid key'
     end
   else
-    puts 'Coloque um tipo de chave pix válido!
-    TIPOS VÁLIDOS:
+    puts 'Enter a valid pix key type!
+    VALID TYPES:
         - CPF
-        - TEL
+        - CELL
         - EMAIL'
   end
 when '--transacao'
@@ -32,12 +31,12 @@ when '--transacao'
     sleep(1)
     Transaction.new(ARGV[1], ARGV[2], ARGV[3].to_f)
   else
-    puts "Adicione chaves e um preço válido para a transação! exemplo:\n
-    ruby app.rb -t [CHAVE VÁLIDA] [CHAVE VÁLIDA] 10.99"
+    puts "Add keys and a valid price for the transaction! example:\n
+    ruby app.rb -t [VALID KEY] [VALID KEY] 10.99"
   end
 when '--transacoes'
   table = TTY::Table.new(
-    header: ['Pagador', 'Recebedor', 'Data e hora', 'Valor']
+    header: ['Payer', 'Receiver', 'Datetime', 'Price']
   )
   transactions = Transaction.return_all_transactions
   transactions.each do |t|
@@ -45,7 +44,13 @@ when '--transacoes'
     table << t
   end
   puts table.render(:unicode)
-when '--help' || '-h'
+when '--search'
+  if ARGV[1].nil?
+    puts Pix.search_key_initial(ARGV[1])
+  else
+    puts 'Enter a valid search parameter'
+  end
+when '--help'
   puts Config::HELPER
 when '--flush'
   DB.execute 'DELETE FROM Transactions'

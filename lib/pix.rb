@@ -7,13 +7,13 @@ class Pix
 
   def self.insert_data_new_pix(key_type, key)
     # Verify DB
-    return 'Chave já cadastrada' unless search_pix(key).empty?
+    return 'Key already registered' unless search_pix(key).empty?
 
     if verify_key(key_type, key)
       DB.execute 'INSERT INTO Pix VALUES (?,?)', [key_type, key]
-      puts 'Chave adicionada com sucesso ao banco de dados!'
+      puts 'Key successfully added to the database!'
     else
-      puts 'Tivemos um erro ao adicionar a chave, verifique e tente novamente!'
+      puts 'We had an error adding the key, please check and try again!'
     end
   end
 
@@ -25,6 +25,18 @@ class Pix
       true if CpfUtils.valid_cpf?(key)
     end
     true
+  end
+
+  # Search key with your initial
+  def self.search_key_initial(initial)
+    search = DB.execute "SELECT * FROM Pix WHERE key LIKE '#{initial}%'"
+    return 'No records begin with this combination' if search.empty?
+
+    table = TTY::Table.new(
+      header: ['Key type', 'Key']
+    )
+    search.map { |s| table << s }
+    table.render(:unicode)
   end
 
   # Search a pix key
