@@ -24,7 +24,7 @@ class Transaction
 
   def transaction_table
     table = TTY::Table.new(
-      header: ['Payer', 'Receiver', 'Price', 'Datetime'],
+      header: %w[Payer Receiver Price Datetime],
       rows: [[@payer, @receiver, @price, @date.inspect.to_s[0..15]]]
     )
     table.render(:unicode)
