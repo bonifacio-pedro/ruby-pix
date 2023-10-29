@@ -1,0 +1,8 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/RedundantRegexpEscape:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+Style/MutableConstant:
+  Enabled: false
