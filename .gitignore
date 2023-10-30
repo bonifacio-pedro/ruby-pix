@@ -1,3 +1,2 @@
 *.db
 Gemfile.lock
-.rubocop.yml

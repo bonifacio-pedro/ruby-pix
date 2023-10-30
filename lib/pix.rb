@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../db/database'
-require_relative '../config'
+require_relative 'actions'
 require 'cpf_utils'
 
 # Insert, verify and search
 class Pix
-  include Config
   include Database
 
   def self.insert_data_new_pix(username, key_type, key)
@@ -39,10 +38,6 @@ class Pix
     search = Query.search_pix_partial_key(initial)
     return 'No records begin with this combination' if search.empty?
 
-    table = TTY::Table.new(
-      header: %w[Id Username Key-type Key]
-    )
-    search.map { |s| table << s }
-    table.render(:unicode)
+    Actions::generate_table(%w[Id Username Key-type Key], search)
   end
 end
