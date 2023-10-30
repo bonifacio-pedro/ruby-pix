@@ -2,12 +2,10 @@
 
 require_relative 'pix'
 require_relative '../db/database'
-require_relative '../config'
 require 'tty-table'
 
 # Initialize, table and all transactions
 class Transaction
-  include Config
   include Database
   attr_reader :payer, :receiver, :price, :date
 
@@ -19,8 +17,8 @@ class Transaction
 
     # If key exists
     if verify_keys
-      Query.insert_new_transaction(@payer, @receiver, @price, @date)
-      puts 'Transaction added successfully, run ruby ​​app.rb --transactions to check'
+      Query.insert_new_transaction(@payer, @receiver, @price, @date.strftime("%d/%m/%Y"))
+      puts 'Transaction added successfully, run ruby app.rb --transactions to check'
     else
       puts 'Keys not found'
     end
