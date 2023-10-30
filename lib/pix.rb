@@ -38,6 +38,6 @@ class Pix
     search = Query.search_pix_partial_key(initial)
     return 'No records begin with this combination' if search.empty?
 
-    Actions::generate_table(%w[Id Username Key-type Key], search)
+    Actions.generate_table(%w[Id Username Key-type Key], search)
   end
 end

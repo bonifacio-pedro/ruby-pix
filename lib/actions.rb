@@ -9,14 +9,14 @@ require 'tty-table'
 
 # App actions
 module Actions
-	include Config
-	include Database
+  include Config
+  include Database
 
 	# Insert new pix
 	def self.new_pix(args)
-		if self.verify_args?(args) && PIX_TYPES.include?(args[:key_type])
+		if verify_args?(args) && PIX_TYPES.include?(args[:key_type])
         sleep(0.5)
-        puts Pix.insert_data_new_pix(args[:username],args[:key_type],args[:key])
+        puts Pix.insert_data_new_pix(args[:username], args[:key_type], args[:key])
     else
       puts 'Enter a valid pix key and key type (verify if your key is correct)!
       VALID TYPES:
@@ -28,7 +28,7 @@ module Actions
 
 	# Search key
 	def self.search(args)
-		return puts Pix.search_key_initial(args[:key]) if self.verify_args?(args)
+		return puts Pix.search_key_initial(args[:key]) if verify_args?(args)
 
 		puts 'Enter a valid search parameter' 
 	end
@@ -47,7 +47,7 @@ module Actions
 	# Show all transactions
 	def self.transactions
     transactions = Query.return_all_transactions
-    puts self.generate_table(%w[Id Payer Receiver Price Datetime], transactions)
+    puts generate_table(%w[Id Payer Receiver Price Datetime], transactions)
 	end
 
 	# Generates a table
@@ -55,7 +55,7 @@ module Actions
 		table = TTY::Table.new(
       header: headers
     )
-    items.map {|i| table << i}
+    items.map { |i| table << i }
     table.render(:unicode)
 	end
 
@@ -70,11 +70,10 @@ module Actions
 		system('clear')
 	end
 
-	private
 	# Verify system args
 	def self.verify_args?(args)
-		args.values.each do |arg|
-			return false if arg.nil?
+    args.each_value do |arg|
+		  return false if arg.nil?
 		end
 		true
 	end
