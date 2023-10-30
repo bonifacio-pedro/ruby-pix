@@ -4,18 +4,18 @@ require_relative 'config'
 require_relative 'lib/actions'
 require_relative 'db/database'
 
-Actions::start_system
+Actions.start_system
 
 begin
   case ARGV[0]
   when '--new'
-    Actions::new_pix({username: ARGV[1], key_type: ARGV[2], key: ARGV[3]})
+    Actions.new_pix({ username: ARGV[1], key_type: ARGV[2], key: ARGV[3] })
   when '--transaction'
-    Actions::new_transaction({payer: ARGV[1], receiver: ARGV[2], price: ARGV[3]})
+    Actions.new_transaction({ payer: ARGV[1], receiver: ARGV[2], price: ARGV[3] })
   when '--transactions'
-    Actions::transactions
+    Actions.transactions
   when '--search'
-    Actions::search({key: ARGV[1]})
+    Actions.search({ key: ARGV[1] })
   when '--help'
     puts Config::HELPER
   when '--db'
