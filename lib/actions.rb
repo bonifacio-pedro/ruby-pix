@@ -12,11 +12,11 @@ module Actions
   include Config
   include Database
 
-	# Insert new pix
-	def self.new_pix(args)
-		if verify_args?(args) && PIX_TYPES.include?(args[:key_type])
-        sleep(0.5)
-        puts Pix.insert_data_new_pix(args[:username], args[:key_type], args[:key])
+  # Insert new pix
+  def self.new_pix(args)
+    if verify_args?(args) && PIX_TYPES.include?(args[:key_type])
+      sleep(0.5)
+      puts Pix.insert_data_new_pix(args[:username], args[:key_type], args[:key])
     else
       puts 'Enter a valid pix key and key type (verify if your key is correct)!
       VALID TYPES:
@@ -27,8 +27,8 @@ module Actions
 	end
 
 	# Search key
-	def self.search(args)
-		return puts Pix.search_key_initial(args[:key]) if verify_args?(args)
+  def self.search(args)
+	  return puts Pix.search_key_initial(args[:key]) if verify_args?(args)
 
 		puts 'Enter a valid search parameter' 
 	end

@@ -17,7 +17,7 @@ class Transaction
 
     # If key exists
     if verify_keys
-      Query.insert_new_transaction(@payer, @receiver, @price, @date.strftime("%d/%m/%Y"))
+      Query.insert_new_transaction(@payer, @receiver, @price, @date.strftime('%d/%m/%Y'))
       puts 'Transaction added successfully, run ruby app.rb --transactions to check'
     else
       puts 'Keys not found'
